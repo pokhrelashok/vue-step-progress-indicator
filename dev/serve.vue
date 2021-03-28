@@ -7,14 +7,27 @@ export default Vue.extend({
   components: {
     VueCircularStepProgressIndicator,
   },
+  methods: {
+    onPageChanged: function (page) {
+      console.log(page);
+    },
+  },
 });
 </script>
 
 <template>
   <div id="app">
     <vue-circular-step-progress-indicator
-      :steps="['1', '2', '3', '4']"
-      activeStep="0"
+      :steps="[
+        'Add invites',
+        'Set Up',
+        'Select Template',
+        'Send Invitations',
+        'Done',
+      ]"
+      :activeStep="0"
+      :is-clickable="true"
+      @onPageChanged="onPageChanged"
     />
   </div>
 </template>

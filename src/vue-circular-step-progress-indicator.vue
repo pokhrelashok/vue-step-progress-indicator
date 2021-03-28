@@ -1,17 +1,24 @@
 <template>
-  <div class="row ml-1">
-    <div class="mb-4 progress-holder">
-      <span v-for="(step, index) in steps" :key="'step_' + step"
-        ><div
-          :class="
-            'progress-bubble ' + (index == activeStep ? 'active-step' : '')
-          "
-        >
-          {{ index + 1 }}
-        </div>
-        <span class="progress-label ml-1 mr-4">{{ step }}</span></span
+  <div class="progress__wrapper">
+    <span
+      @click="callPageChange(index)"
+      v-for="(step, index) in steps"
+      :key="'step_' + step"
+      class="progress__block"
+      v-bind:class="{
+        clickable: isClickable,
+      }"
+      ><div
+        class="progress__bubble"
+        v-bind:class="{
+          'progress__active-bubble': index == currentStep,
+        }"
       >
-    </div>
+        {{ index + 1 }}
+      </div>
+      <span v-if="showLabel" class="progress__label">{{ step }}</span>
+      <div v-if="index != steps.length - 1" class="progress__bridge"></div>
+    </span>
   </div>
 </template>
 
@@ -28,6 +35,31 @@ export default {
       type: Number,
       required: true,
     },
+    isClickable: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    showLabel: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+
+  data() {
+    return {
+      currentStep: this.activeStep,
+    };
+  },
+
+  methods: {
+    callPageChange: function (page) {
+      if (this.isClickable) {
+        this.currentStep = page;
+        this.$emit("onPageChanged", page);
+      }
+    },
   },
 };
 </script>
@@ -35,36 +67,62 @@ export default {
 
 
 <style scoped>
-.ml-1 {
-  margin-left: 0.25rem !important;
-}
-.mr-4 {
-  margin-right: 1.5rem !important;
-}
-.mb-4 {
-  margin-bottom: 1.5rem !important;
-}
-.row {
+.progress__wrapper {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-}
-.progress-holder {
+  display: flex;
+  justify-content: flex-start;
   line-height: 30px;
+  margin-top: 1rem;
 }
-.progress-bubble {
+.clickable {
+  cursor: pointer;
+}
+.progress__block {
+  display: flex;
+  align-items: center;
+  /* margin-right: 1rem; */
+}
+.progress__bridge {
+  display: inline-block;
+  background: red;
+  height: 2px;
+  flex-grow: 1;
+  width: 20px;
+  /* width: 100%; */
+}
+.progress__bubble {
+  /* margin-right: 0.5rem; */
   display: inline-block;
   height: 30px;
   width: 30px;
   border-radius: 100%;
   background: transparent;
-  border: 1px grey solid;
+  border: 5px grey solid;
   text-align: center;
 }
-.active-step {
-  border: 1px solid #1e7e34;
+.progress__active-bubble {
+  border-color: #1e7e34;
+}
+
+@media (max-width: 768px) {
+  .progress__wrapper {
+    justify-content: space-around;
+  }
+  .progress__label {
+    display: none;
+  }
+  .progress__bubble {
+    margin: 0;
+  }
+  .progress__block {
+    flex-grow: 1;
+    margin-right: 0;
+  }
+  .progress__block {
+    margin: 0;
+  }
 }
 </style>
