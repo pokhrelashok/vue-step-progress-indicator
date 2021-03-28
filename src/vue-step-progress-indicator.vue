@@ -10,7 +10,7 @@
         v-bind:class="{
           'progress__bubble-completed': index <= currentStep,
           'progress__bubble-active': isActive(index),
-          clickable: isReactive,
+          clickable: isReactive && checkIfStepIsReactive(index),
         }"
       >
         {{ index + 1 }}
@@ -20,7 +20,7 @@
         v-bind:class="{
           'progress__label-completed': index <= currentStep,
           'progress__label-active': isActive(index),
-          clickable: isReactive,
+          clickable: isReactive && checkIfStepIsReactive(index),
         }"
         v-if="showLabel"
         class="progress__label"
@@ -28,12 +28,12 @@
       >
       <div
         v-if="
-          (showBridge || showBridgeOnSmallDevice) && index != steps.length - 1
+          (showBridge || showBridgeOnSmallDevices) && index != steps.length - 1
         "
         v-bind:class="{
           'progress__bridge-completed': index < currentStep,
           'hide-on-large': !showBridge,
-          'display-on-small': showBridgeOnSmallDevice,
+          'display-on-small': showBridgeOnSmallDevices,
         }"
         class="progress__bridge"
       ></div>
@@ -59,6 +59,15 @@ export default {
       required: false,
       default: false,
     },
+    reactivityType: {
+      type: String,
+      required: false,
+      default: "all",
+      validator: (propValue) => {
+        const types = ["all", "backward", "forward", "single-step"];
+        return types.includes(propValue);
+      },
+    },
     showLabel: {
       type: Boolean,
       required: false,
@@ -69,7 +78,12 @@ export default {
       required: false,
       default: false,
     },
-    showBridgeOnSmallDevice: {
+    showBridgeOnSmallDevices: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    showBridgeOnSmallDevices: {
       type: Boolean,
       required: false,
       default: true,
@@ -78,20 +92,39 @@ export default {
 
   data() {
     return {
-      currentStep: this.activeStep,
+      currentStep: this.activeStep < this.steps.length ? this.activeStep : 0,
     };
   },
 
   methods: {
     callPageChange: function (step) {
-      if (this.isReactive) {
-        this.currentStep = step;
-        this.$emit("onStepChange", step);
-        if (step == this.steps.length - 1) this.$emit("onStepCompleted", step);
-      }
+      if (!this.isReactive) return;
+      if (!this.checkIfStepIsReactive(step)) return;
+      this.currentStep = step;
+      this.$emit("onStepChanged", step);
+      if (step == this.steps.length - 1) this.$emit("onEnterFinalStep", step);
     },
     isActive: function (index) {
       return index === this.currentStep;
+    },
+    checkIfStepIsReactive: function (index) {
+      switch (this.reactivityType) {
+        case "all":
+          return true;
+        case "backward":
+          return index < this.currentStep;
+        case "forward":
+          return index > this.currentStep;
+        case "single-step":
+          return index == this.currentStep - 1 || index == this.currentStep + 1;
+        default:
+          return false;
+      }
+    },
+  },
+  watch: {
+    activeStep: function (newVal) {
+      if (this.activeStep < this.steps.length) this.currentStep = newVal;
     },
   },
 };

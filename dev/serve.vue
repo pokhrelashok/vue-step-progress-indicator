@@ -25,8 +25,9 @@ export default Vue.extend({
         'Send Invitations',
         'Done',
       ]"
-      :activeStep="0"
-      :is-clickable="true"
+      :active-step="0"
+      :reactivity-type="'all'"
+      :is-reactive="true"
     />
   </div>
 </template>
