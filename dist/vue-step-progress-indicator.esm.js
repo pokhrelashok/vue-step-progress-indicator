@@ -53,10 +53,19 @@ var script = {
       type: Number,
       required: true
     },
-    isClickable: {
+    isReactive: {
       type: Boolean,
       required: false,
       default: false
+    },
+    reactivityType: {
+      type: String,
+      required: false,
+      default: "all",
+      validator: propValue => {
+        const types = ["all", "backward", "forward", "single-step"];
+        return types.includes(propValue);
+      }
     },
     showLabel: {
       type: Boolean,
@@ -68,7 +77,12 @@ var script = {
       required: false,
       default: false
     },
-    showBridgeOnSmallDevice: {
+    showBridgeOnSmallDevices: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    showBridgeOnSmallDevices: {
       type: Boolean,
       required: false,
       default: true
@@ -77,20 +91,43 @@ var script = {
 
   data() {
     return {
-      currentStep: this.activeStep
+      currentStep: this.activeStep < this.steps.length ? this.activeStep : 0
     };
   },
 
   methods: {
     callPageChange: function (step) {
-      if (this.isClickable) {
-        this.currentStep = step;
-        this.$emit("onStepChanged", step);
-        if (step == this.steps.length - 1) this.$emit("onProgressCompleted", step);
-      }
+      if (!this.isReactive) return;
+      if (!this.checkIfStepIsReactive(step)) return;
+      this.currentStep = step;
+      this.$emit("onStepChanged", step);
+      if (step == this.steps.length - 1) this.$emit("onEnterFinalStep", step);
     },
     isActive: function (index) {
       return index === this.currentStep;
+    },
+    checkIfStepIsReactive: function (index) {
+      switch (this.reactivityType) {
+        case "all":
+          return true;
+
+        case "backward":
+          return index < this.currentStep;
+
+        case "forward":
+          return index > this.currentStep;
+
+        case "single-step":
+          return index == this.currentStep - 1 || index == this.currentStep + 1;
+
+        default:
+          return false;
+      }
+    }
+  },
+  watch: {
+    activeStep: function (newVal) {
+      if (this.activeStep < this.steps.length) this.currentStep = newVal;
     }
   }
 };
@@ -245,7 +282,7 @@ var __vue_render__ = function () {
       class: {
         'progress__bubble-completed': index <= _vm.currentStep,
         'progress__bubble-active': _vm.isActive(index),
-        clickable: _vm.isClickable
+        clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
       },
       on: {
         "click": function ($event) {
@@ -257,19 +294,19 @@ var __vue_render__ = function () {
       class: {
         'progress__label-completed': index <= _vm.currentStep,
         'progress__label-active': _vm.isActive(index),
-        clickable: _vm.isClickable
+        clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
       },
       on: {
         "click": function ($event) {
           return _vm.callPageChange(index);
         }
       }
-    }, [_vm._v(_vm._s(step))]) : _vm._e(), _vm._v(" "), (_vm.showBridge || _vm.showBridgeOnSmallDevice) && index != _vm.steps.length - 1 ? _c('div', {
+    }, [_vm._v(_vm._s(step))]) : _vm._e(), _vm._v(" "), (_vm.showBridge || _vm.showBridgeOnSmallDevices) && index != _vm.steps.length - 1 ? _c('div', {
       staticClass: "progress__bridge",
       class: {
         'progress__bridge-completed': index < _vm.currentStep,
         'hide-on-large': !_vm.showBridge,
-        'display-on-small': _vm.showBridgeOnSmallDevice
+        'display-on-small': _vm.showBridgeOnSmallDevices
       }
     }) : _vm._e()]);
   }), 0);
@@ -280,8 +317,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-95109d56_0", {
-    source: ".progress__wrapper[data-v-95109d56]{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;display:flex;justify-content:flex-start;line-height:30px;margin-top:1rem}.clickable[data-v-95109d56]{cursor:pointer}.progress__block[data-v-95109d56]{display:flex;align-items:center}.progress__bridge[data-v-95109d56]{display:inline-block;background:grey;height:2px;flex-grow:1;width:20px}.progress__bubble[data-v-95109d56]{display:inline-block;height:30px;width:30px;border-radius:100%;background:0 0;border:5px grey solid;text-align:center}.progress__label[data-v-95109d56]{margin:0 .8rem}.progress__bubble-completed[data-v-95109d56]{border-color:#1e7e34;background:#1e7e34;color:#fff}.progress__bubble-active[data-v-95109d56]{border-color:red;background:red;color:#fff}.progress__label-completed[data-v-95109d56]{color:#1e7e34}.progress__label-active[data-v-95109d56]{color:#1e7e34}.progress__bridge-completed[data-v-95109d56]{background:#1e7e34}.hide-on-large[data-v-95109d56]{display:none}@media (max-width:768px){.progress__wrapper[data-v-95109d56]{justify-content:space-around}.progress__label[data-v-95109d56]{display:none}.progress__bubble[data-v-95109d56]{margin:0}.progress__block[data-v-95109d56]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-95109d56]{display:block}.progress__block[data-v-95109d56]{margin:0}}",
+  inject("data-v-12dbfee5_0", {
+    source: ".progress__wrapper[data-v-12dbfee5]{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;display:flex;justify-content:flex-start;line-height:30px;margin-top:1rem}.clickable[data-v-12dbfee5]{cursor:pointer}.progress__block[data-v-12dbfee5]{display:flex;align-items:center}.progress__bridge[data-v-12dbfee5]{display:inline-block;background:grey;height:2px;flex-grow:1;width:20px}.progress__bubble[data-v-12dbfee5]{display:inline-block;height:30px;width:30px;border-radius:100%;background:0 0;border:5px grey solid;text-align:center}.progress__label[data-v-12dbfee5]{margin:0 .8rem}.progress__bubble-completed[data-v-12dbfee5]{border-color:#1e7e34;background:#1e7e34;color:#fff}.progress__bubble-active[data-v-12dbfee5]{border-color:red;background:red;color:#fff}.progress__label-completed[data-v-12dbfee5]{color:#1e7e34}.progress__label-active[data-v-12dbfee5]{color:#1e7e34}.progress__bridge-completed[data-v-12dbfee5]{background:#1e7e34}.hide-on-large[data-v-12dbfee5]{display:none}@media (max-width:768px){.progress__wrapper[data-v-12dbfee5]{justify-content:space-around}.progress__label[data-v-12dbfee5]{display:none}.progress__bubble[data-v-12dbfee5]{margin:0}.progress__block[data-v-12dbfee5]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-12dbfee5]{display:block}.progress__block[data-v-12dbfee5]{margin:0}}",
     map: undefined,
     media: undefined
   });
@@ -289,7 +326,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-95109d56";
+const __vue_scope_id__ = "data-v-12dbfee5";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;
