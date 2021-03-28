@@ -140,8 +140,7 @@ export default {
   flex-wrap: wrap;
   display: flex;
   justify-content: flex-start;
-  line-height: 30px;
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 .clickable {
   cursor: pointer;
@@ -158,6 +157,9 @@ export default {
   width: 20px;
 }
 .progress__bubble {
+  margin: 0;
+  padding: 0;
+  line-height: 30px;
   display: inline-block;
   height: 30px;
   width: 30px;
