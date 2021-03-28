@@ -1,11 +1,11 @@
 {
-  "name": "vue-circular-step-progress-indicator",
+  "name": "vue-step-progress-indicator",
   "version": "0.0.1",
   "description": "This is a simple step progress indicator. You can define how many steps your project has, and can indicate the active step.",
-  "main": "dist/vue-circular-step-progress-indicator.ssr.js",
-  "browser": "dist/vue-circular-step-progress-indicator.esm.js",
-  "module": "dist/vue-circular-step-progress-indicator.esm.js",
-  "unpkg": "dist/vue-circular-step-progress-indicator.min.js",
+  "main": "dist/vue-step-progress-indicator.ssr.js",
+  "browser": "dist/vue-step-progress-indicator.esm.js",
+  "module": "dist/vue-step-progress-indicator.esm.js",
+  "unpkg": "dist/vue-step-progress-indicator.min.js",
   "files": [
     "dist/*",
     "src/**/*.vue"

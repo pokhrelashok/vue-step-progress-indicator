@@ -1,11 +1,11 @@
 <script>
 import Vue from "vue";
-import VueCircularStepProgressIndicator from "@/vue-circular-step-progress-indicator.vue";
+import VueStepProgressIndicator from "@/vue-step-progress-indicator.vue";
 
 export default Vue.extend({
   name: "ServeDev",
   components: {
-    VueCircularStepProgressIndicator,
+    VueStepProgressIndicator,
   },
   methods: {
     onPageChanged: function (page) {
@@ -17,7 +17,7 @@ export default Vue.extend({
 
 <template>
   <div id="app">
-    <vue-circular-step-progress-indicator
+    <vue-step-progress-indicator
       :steps="[
         'Add invites',
         'Set Up',
@@ -27,7 +27,6 @@ export default Vue.extend({
       ]"
       :activeStep="0"
       :is-clickable="true"
-      @onPageChanged="onPageChanged"
     />
   </div>
 </template>

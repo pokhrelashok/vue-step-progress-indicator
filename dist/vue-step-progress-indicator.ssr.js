@@ -70,6 +70,32 @@ function _nonIterableRest() {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var script = {
   name: "ProgressBar",
   props: {
@@ -80,6 +106,43 @@ var script = {
     activeStep: {
       type: Number,
       required: true
+    },
+    isClickable: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    showLabel: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    showBridge: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    showBridgeOnSmallDevice: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
+  data: function data() {
+    return {
+      currentStep: this.activeStep
+    };
+  },
+  methods: {
+    callPageChange: function callPageChange(step) {
+      if (this.isClickable) {
+        this.currentStep = step;
+        this.$emit("onStepChanged", step);
+        if (step == this.steps.length - 1) this.$emit("onProgressCompleted", step);
+      }
+    },
+    isActive: function isActive(index) {
+      return index === this.currentStep;
     }
   }
 };function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -207,10 +270,22 @@ var __vue_render__ = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c('div', {
-    staticClass: "row ml-1"
-  }, [_vm._ssrNode("<div class=\"mb-4 progress-holder\" data-v-3891b48f>" + _vm._ssrList(_vm.steps, function (step, index) {
-    return "<span data-v-3891b48f><div" + _vm._ssrClass(null, 'progress-bubble ' + (index == _vm.activeStep ? 'active-step' : '')) + " data-v-3891b48f>" + _vm._ssrEscape("\n        " + _vm._s(index + 1) + "\n      ") + "</div> <span class=\"progress-label ml-1 mr-4\" data-v-3891b48f>" + _vm._ssrEscape(_vm._s(step)) + "</span></span>";
-  }) + "</div>")]);
+    staticClass: "progress__wrapper"
+  }, [_vm._ssrNode(_vm._ssrList(_vm.steps, function (step, index) {
+    return "<span class=\"progress__block\" data-v-95109d56><div" + _vm._ssrClass("progress__bubble", {
+      'progress__bubble-completed': index <= _vm.currentStep,
+      'progress__bubble-active': _vm.isActive(index),
+      clickable: _vm.isClickable
+    }) + " data-v-95109d56>" + _vm._ssrEscape("\n      " + _vm._s(index + 1) + "\n    ") + "</div> " + (_vm.showLabel ? "<span" + _vm._ssrClass("progress__label", {
+      'progress__label-completed': index <= _vm.currentStep,
+      'progress__label-active': _vm.isActive(index),
+      clickable: _vm.isClickable
+    }) + " data-v-95109d56>" + _vm._ssrEscape(_vm._s(step)) + "</span>" : "<!---->") + " " + ((_vm.showBridge || _vm.showBridgeOnSmallDevice) && index != _vm.steps.length - 1 ? "<div" + _vm._ssrClass("progress__bridge", {
+      'progress__bridge-completed': index < _vm.currentStep,
+      'hide-on-large': !_vm.showBridge,
+      'display-on-small': _vm.showBridgeOnSmallDevice
+    }) + " data-v-95109d56></div>" : "<!---->") + "</span>";
+  }))]);
 };
 
 var __vue_staticRenderFns__ = [];
@@ -218,8 +293,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-3891b48f_0", {
-    source: ".ml-1[data-v-3891b48f]{margin-left:.25rem!important}.mr-4[data-v-3891b48f]{margin-right:1.5rem!important}.mb-4[data-v-3891b48f]{margin-bottom:1.5rem!important}.row[data-v-3891b48f]{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-15px;margin-left:-15px}.progress-holder[data-v-3891b48f]{line-height:30px}.progress-bubble[data-v-3891b48f]{display:inline-block;height:30px;width:30px;border-radius:100%;background:0 0;border:1px grey solid;text-align:center}.active-step[data-v-3891b48f]{border:1px solid #1e7e34}",
+  inject("data-v-95109d56_0", {
+    source: ".progress__wrapper[data-v-95109d56]{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;display:flex;justify-content:flex-start;line-height:30px;margin-top:1rem}.clickable[data-v-95109d56]{cursor:pointer}.progress__block[data-v-95109d56]{display:flex;align-items:center}.progress__bridge[data-v-95109d56]{display:inline-block;background:grey;height:2px;flex-grow:1;width:20px}.progress__bubble[data-v-95109d56]{display:inline-block;height:30px;width:30px;border-radius:100%;background:0 0;border:5px grey solid;text-align:center}.progress__label[data-v-95109d56]{margin:0 .8rem}.progress__bubble-completed[data-v-95109d56]{border-color:#1e7e34;background:#1e7e34;color:#fff}.progress__bubble-active[data-v-95109d56]{border-color:red;background:red;color:#fff}.progress__label-completed[data-v-95109d56]{color:#1e7e34}.progress__label-active[data-v-95109d56]{color:#1e7e34}.progress__bridge-completed[data-v-95109d56]{background:#1e7e34}.hide-on-large[data-v-95109d56]{display:none}@media (max-width:768px){.progress__wrapper[data-v-95109d56]{justify-content:space-around}.progress__label[data-v-95109d56]{display:none}.progress__bubble[data-v-95109d56]{margin:0}.progress__block[data-v-95109d56]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-95109d56]{display:block}.progress__block[data-v-95109d56]{margin:0}}",
     map: undefined,
     media: undefined
   });
@@ -227,10 +302,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-3891b48f";
+var __vue_scope_id__ = "data-v-95109d56";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-3891b48f";
+var __vue_module_identifier__ = "data-v-95109d56";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
@@ -248,7 +323,7 @@ var component = /*#__PURE__*/(function () {
   var installable = __vue_component__; // Attach install function executed by Vue.use()
 
   installable.install = function (Vue) {
-    Vue.component('VueCircularStepProgressIndicator', installable);
+    Vue.component("VueStepProgressIndicator", installable);
   };
 
   return installable;

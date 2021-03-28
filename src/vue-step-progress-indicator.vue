@@ -10,7 +10,7 @@
         v-bind:class="{
           'progress__bubble-completed': index <= currentStep,
           'progress__bubble-active': isActive(index),
-          clickable: isClickable,
+          clickable: isReactive,
         }"
       >
         {{ index + 1 }}
@@ -20,7 +20,7 @@
         v-bind:class="{
           'progress__label-completed': index <= currentStep,
           'progress__label-active': isActive(index),
-          clickable: isClickable,
+          clickable: isReactive,
         }"
         v-if="showLabel"
         class="progress__label"
@@ -54,7 +54,7 @@ export default {
       type: Number,
       required: true,
     },
-    isClickable: {
+    isReactive: {
       type: Boolean,
       required: false,
       default: false,
@@ -84,11 +84,10 @@ export default {
 
   methods: {
     callPageChange: function (step) {
-      if (this.isClickable) {
+      if (this.isReactive) {
         this.currentStep = step;
-        this.$emit("onStepChanged", step);
-        if (step == this.steps.length - 1)
-          this.$emit("onProgressCompleted", step);
+        this.$emit("onStepChange", step);
+        if (step == this.steps.length - 1) this.$emit("onStepCompleted", step);
       }
     },
     isActive: function (index) {
