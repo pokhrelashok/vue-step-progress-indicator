@@ -108,7 +108,7 @@ behaviour by using above listed props, or by changing the styles.
 
 On large devices, the labels are shown and the bridges are hidden by default.<br/>
 ![On Large Device](./assets/device-lg.png?raw=true)
-On smaller devices, the labels are hidden and the bridges are shown by default.
+<br/>On smaller devices, the labels are hidden and the bridges are shown by default.
 ![On Small Device](./assets/device-sm.png?raw=true)
 
 ## Contributing
