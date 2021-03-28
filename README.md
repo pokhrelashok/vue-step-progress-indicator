@@ -106,8 +106,8 @@ behaviour by using above listed props, or by changing the styles.
 
 ### Screenshots
 
-![On Large Device](https://github.com/pokhrelashok/vue-step-progress-indicator/blob/main/assets/device-lg?raw=true)
-![On Small Device](https://github.com/pokhrelashok/vue-step-progress-indicator/blob/main/assets/device-sm?raw=true)
+![On Large Device](./assets/device-lg.png?raw=true)
+![On Small Device](./assets/device-sm.png?raw=true)
 
 ## Contributing
 
