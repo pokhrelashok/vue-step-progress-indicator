@@ -68,8 +68,8 @@ components: {
 ### Customization
 
 Since customization can vary hugely for each use case, i thought it would be too much hassle to pass colors, width and height as props.
-Instead overwriting the style in the parent component would be way simpler. Just make sure to use
-`css !important`
+Instead overwriting the styles would be way simpler. Just make sure to use
+`!important`
 on every style you want to overwrite.
 Here is a complete set of css classes used in the project
 
