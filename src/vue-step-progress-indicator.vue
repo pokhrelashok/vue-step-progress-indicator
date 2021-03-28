@@ -160,12 +160,14 @@ export default {
   margin: 0;
   padding: 0;
   line-height: 30px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 30px;
   width: 30px;
   border-radius: 100%;
   background: transparent;
-  border: 5px grey solid;
+  border: 2px grey solid;
   text-align: center;
 }
 .progress__label {
@@ -177,8 +179,8 @@ export default {
   color: white;
 }
 .progress__bubble-active {
-  border-color: red;
-  background: red;
+  border-color: #1e7e34;
+  background: #1e7e34;
   color: white;
 }
 .progress__label-completed {
