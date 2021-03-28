@@ -1,23 +1,42 @@
 <template>
   <div class="progress__wrapper">
     <span
-      @click="callPageChange(index)"
       v-for="(step, index) in steps"
       :key="'step_' + step"
       class="progress__block"
-      v-bind:class="{
-        clickable: isClickable,
-      }"
       ><div
+        @click="callPageChange(index)"
         class="progress__bubble"
         v-bind:class="{
-          'progress__active-bubble': index == currentStep,
+          'progress__bubble-completed': index <= currentStep,
+          'progress__bubble-active': isActive(index),
+          clickable: isClickable,
         }"
       >
         {{ index + 1 }}
       </div>
-      <span v-if="showLabel" class="progress__label">{{ step }}</span>
-      <div v-if="index != steps.length - 1" class="progress__bridge"></div>
+      <span
+        @click="callPageChange(index)"
+        v-bind:class="{
+          'progress__label-completed': index <= currentStep,
+          'progress__label-active': isActive(index),
+          clickable: isClickable,
+        }"
+        v-if="showLabel"
+        class="progress__label"
+        >{{ step }}</span
+      >
+      <div
+        v-if="
+          (showBridge || showBridgeOnSmallDevice) && index != steps.length - 1
+        "
+        v-bind:class="{
+          'progress__bridge-completed': index < currentStep,
+          'hide-on-large': !showBridge,
+          'display-on-small': showBridgeOnSmallDevice,
+        }"
+        class="progress__bridge"
+      ></div>
     </span>
   </div>
 </template>
@@ -43,7 +62,17 @@ export default {
     showLabel: {
       type: Boolean,
       required: false,
+      default: true,
+    },
+    showBridge: {
+      type: Boolean,
+      required: false,
       default: false,
+    },
+    showBridgeOnSmallDevice: {
+      type: Boolean,
+      required: false,
+      default: true,
     },
   },
 
@@ -54,11 +83,16 @@ export default {
   },
 
   methods: {
-    callPageChange: function (page) {
+    callPageChange: function (step) {
       if (this.isClickable) {
-        this.currentStep = page;
-        this.$emit("onPageChanged", page);
+        this.currentStep = step;
+        this.$emit("onStepChanged", step);
+        if (step == this.steps.length - 1)
+          this.$emit("onProgressCompleted", step);
       }
+    },
+    isActive: function (index) {
+      return index === this.currentStep;
     },
   },
 };
@@ -83,18 +117,15 @@ export default {
 .progress__block {
   display: flex;
   align-items: center;
-  /* margin-right: 1rem; */
 }
 .progress__bridge {
   display: inline-block;
-  background: red;
+  background: grey;
   height: 2px;
   flex-grow: 1;
   width: 20px;
-  /* width: 100%; */
 }
 .progress__bubble {
-  /* margin-right: 0.5rem; */
   display: inline-block;
   height: 30px;
   width: 30px;
@@ -103,8 +134,30 @@ export default {
   border: 5px grey solid;
   text-align: center;
 }
-.progress__active-bubble {
+.progress__label {
+  margin: 0 0.8rem;
+}
+.progress__bubble-completed {
   border-color: #1e7e34;
+  background: #1e7e34;
+  color: white;
+}
+.progress__bubble-active {
+  border-color: red;
+  background: red;
+  color: white;
+}
+.progress__label-completed {
+  color: #1e7e34;
+}
+.progress__label-active {
+  color: #1e7e34;
+}
+.progress__bridge-completed {
+  background: #1e7e34;
+}
+.hide-on-large {
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -117,9 +170,12 @@ export default {
   .progress__bubble {
     margin: 0;
   }
-  .progress__block {
+  .progress__block:not(:last-of-type) {
     flex-grow: 1;
     margin-right: 0;
+  }
+  .display-on-small {
+    display: block;
   }
   .progress__block {
     margin: 0;
