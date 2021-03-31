@@ -151,41 +151,40 @@ export default {
         progress__bubble: {
           active: {
             color: "#fff",
-            backgroundColor: "red",
-            borderColor: "red",
+            backgroundColor: "#e74c3c",
+            borderColor: "#e74c3c",
           },
           inactive: {
-            color: "black",
+            color: "#fff",
+            backgroundColor: "#34495e",
+            borderColor: "#34495e",
           },
           completed: {
             color: "#fff",
-            borderColor: "#1e7e34",
-            backgroundColor: "#1e7e34",
+            borderColor: "#27ae60",
+            backgroundColor: "#27ae60",
           },
         },
         progress__label: {
           active: {
-            color: "red",
+            color: "#e74c3c",
           },
           inactive: {
-            color: "black",
+            color: "#34495e",
           },
           completed: {
-            color: "#1e7e34",
+            color: "#27ae60",
           },
         },
         progress__bridge: {
           active: {
-            backgroundColor: "black",
-            borderColor: "black",
+            backgroundColor: "#e74c3c",
           },
           inactive: {
-            backgroundColor: "black",
-            borderColor: "black",
+            backgroundColor: "#34495e",
           },
           completed: {
-            backgroundColor: "#1e7e34",
-            borderColor: "#1e7e34",
+            backgroundColor: "#27ae60",
           },
         },
       },
@@ -276,8 +275,6 @@ export default {
 
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
-
 .clickable {
   cursor: pointer;
 }

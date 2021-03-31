@@ -58,7 +58,7 @@ components: {
 | show-bridge                  | Boolean | If true, the bridges will be displayed (bridges will be displayed on small devices, irrespective of this)                                                                                                                                                                                                                                                                            |
 | show-bridge-on-small-devices | Boolean | If false, the bridges will be hidden even on smaller devices                                                                                                                                                                                                                                                                                                                         |
 | styles                       | Object  | Provide custom style for various UI components                                                                                                                                                                                                                                                                                                                                       |
-| colors                       | Object  | Provide colrs for various UI components                                                                                                                                                                                                                                                                                                                                              |
+| colors                       | Object  | Provide colors for various UI components                                                                                                                                                                                                                                                                                                                                             |
 
 ### Events
 
@@ -69,7 +69,7 @@ components: {
 
 ### Customization
 
-This package has been created by taking your customization needs in mind. You can not only provide colors for components for different states (active, inactive and completed), you can do custom styling for each component in the UI. Here is an example.
+This package has been created by taking your customization needs in mind. You can not only provide colors for components for different states (`active`, `inactive` and `completed`), you can do custom styling for each component in the UI. Here is an example.
 
 ```js
 // this is the default style being used in the package
@@ -126,42 +126,41 @@ You may also want to customize the colors of components. The progress bubbles ca
 colorData: {
     progress__bubble: {
         active: {
-            color: "#fff",
-            backgroundColor: "red",
-            borderColor: "red",
+        color: "#fff",
+        backgroundColor: "#e74c3c",
+        borderColor: "#e74c3c",
         },
         inactive: {
-            color: "black",
+        color: "#fff",
+        backgroundColor: "#34495e",
+        borderColor: "#34495e",
         },
         completed: {
-            color: "#fff",
-            borderColor: "#1e7e34",
-            backgroundColor: "#1e7e34",
+        color: "#fff",
+        borderColor: "#27ae60",
+        backgroundColor: "#27ae60",
         },
     },
     progress__label: {
         active: {
-            color: "red",
+        color: "#e74c3c",
         },
         inactive: {
-            color: "black",
+        color: "#34495e",
         },
         completed: {
-            color: "#1e7e34",
+        color: "#27ae60",
         },
     },
     progress__bridge: {
         active: {
-            backgroundColor: "black",
-            borderColor: "black",
+        backgroundColor: "#e74c3c",
         },
         inactive: {
-            backgroundColor: "black",
-            borderColor: "black",
+        backgroundColor: "#34495e",
         },
         completed: {
-            backgroundColor: "#1e7e34",
-            borderColor: "#1e7e34",
+        backgroundColor: "#27ae60",
         },
     },
 },
@@ -177,11 +176,11 @@ colorData: {
 
 On large devices, the labels are shown and the bridges are hidden by default.<br/>
 
-![On Large Device](https://i.imgur.com/9vxaPPh.png)
+![On Large Device](https://i.imgur.com/ZR9q1OK.png)
 
 <br/>On smaller devices, the labels are hidden and the bridges are shown by default.
 
-![On Small Device](https://i.imgur.com/HSV70kS.png)
+![On Small Device](https://i.imgur.com/tpfsClZ.png)
 
 ## Contributing
 

@@ -150,41 +150,40 @@ var script = {
         progress__bubble: {
           active: {
             color: "#fff",
-            backgroundColor: "red",
-            borderColor: "red"
+            backgroundColor: "#e74c3c",
+            borderColor: "#e74c3c"
           },
           inactive: {
-            color: "black"
+            color: "#fff",
+            backgroundColor: "#34495e",
+            borderColor: "#34495e"
           },
           completed: {
             color: "#fff",
-            borderColor: "#1e7e34",
-            backgroundColor: "#1e7e34"
+            borderColor: "#27ae60",
+            backgroundColor: "#27ae60"
           }
         },
         progress__label: {
           active: {
-            color: "red"
+            color: "#e74c3c"
           },
           inactive: {
-            color: "black"
+            color: "#34495e"
           },
           completed: {
-            color: "#1e7e34"
+            color: "#27ae60"
           }
         },
         progress__bridge: {
           active: {
-            backgroundColor: "black",
-            borderColor: "black"
+            backgroundColor: "#e74c3c"
           },
           inactive: {
-            backgroundColor: "black",
-            borderColor: "black"
+            backgroundColor: "#34495e"
           },
           completed: {
-            backgroundColor: "#1e7e34",
-            borderColor: "#1e7e34"
+            backgroundColor: "#27ae60"
           }
         }
       }
@@ -453,8 +452,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-15cb8c60_0", {
-    source: "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap);.clickable[data-v-15cb8c60]{cursor:pointer}.hide-on-large[data-v-15cb8c60]{display:none}@media (max-width:768px){.progress__wrapper[data-v-15cb8c60]{justify-content:space-around}.progress__label[data-v-15cb8c60]{display:none}.progress__bubble[data-v-15cb8c60]{margin:0}.progress__block[data-v-15cb8c60]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-15cb8c60]{display:inline-block}.progress__block[data-v-15cb8c60]{margin:0}}",
+  inject("data-v-b50ced38_0", {
+    source: ".clickable[data-v-b50ced38]{cursor:pointer}.hide-on-large[data-v-b50ced38]{display:none}@media (max-width:768px){.progress__wrapper[data-v-b50ced38]{justify-content:space-around}.progress__label[data-v-b50ced38]{display:none}.progress__bubble[data-v-b50ced38]{margin:0}.progress__block[data-v-b50ced38]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-b50ced38]{display:inline-block}.progress__block[data-v-b50ced38]{margin:0}}",
     map: undefined,
     media: undefined
   });
@@ -462,7 +461,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-15cb8c60";
+const __vue_scope_id__ = "data-v-b50ced38";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

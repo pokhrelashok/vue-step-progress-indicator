@@ -15,27 +15,26 @@ export default Vue.extend({
   data() {
     return {
       styleData: {
-        progress__wrapper: {
-          margin: "10rem 0",
-        },
         progress__bubble: {
-          borderRadius: 0,
+          borderRadius: "10%",
         },
       },
       colorData: {
         progress__bubble: {
           active: {
-            color: "yello",
-            backgroundColor: "red",
-            borderColor: "red",
+            color: "#fff",
+            backgroundColor: "#e74c3c",
+            borderColor: "#e74c3c",
           },
           inactive: {
-            color: "black",
+            color: "#fff",
+            backgroundColor: "#34495e",
+            borderColor: "#34495e",
           },
           completed: {
-            color: "maroon",
-            borderColor: "#1e7e34",
-            backgroundColor: "#1e7e34",
+            color: "#fff",
+            borderColor: "#27ae60",
+            backgroundColor: "#27ae60",
           },
         },
       },
@@ -62,3 +61,10 @@ export default Vue.extend({
     />
   </div>
 </template>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+</style>

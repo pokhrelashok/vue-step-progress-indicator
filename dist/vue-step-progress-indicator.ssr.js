@@ -215,41 +215,40 @@ var script = {
         progress__bubble: {
           active: {
             color: "#fff",
-            backgroundColor: "red",
-            borderColor: "red"
+            backgroundColor: "#e74c3c",
+            borderColor: "#e74c3c"
           },
           inactive: {
-            color: "black"
+            color: "#fff",
+            backgroundColor: "#34495e",
+            borderColor: "#34495e"
           },
           completed: {
             color: "#fff",
-            borderColor: "#1e7e34",
-            backgroundColor: "#1e7e34"
+            borderColor: "#27ae60",
+            backgroundColor: "#27ae60"
           }
         },
         progress__label: {
           active: {
-            color: "red"
+            color: "#e74c3c"
           },
           inactive: {
-            color: "black"
+            color: "#34495e"
           },
           completed: {
-            color: "#1e7e34"
+            color: "#27ae60"
           }
         },
         progress__bridge: {
           active: {
-            backgroundColor: "black",
-            borderColor: "black"
+            backgroundColor: "#e74c3c"
           },
           inactive: {
-            backgroundColor: "black",
-            borderColor: "black"
+            backgroundColor: "#34495e"
           },
           completed: {
-            backgroundColor: "#1e7e34",
-            borderColor: "#1e7e34"
+            backgroundColor: "#27ae60"
           }
         }
       }
@@ -456,14 +455,14 @@ var __vue_render__ = function __vue_render__() {
     staticClass: "progress__wrapper",
     style: _vm.styleData['progress__wrapper']
   }, [_vm._ssrNode(_vm._ssrList(_vm.steps, function (step, index) {
-    return "<span class=\"progress__block\"" + _vm._ssrStyle(null, _vm.styleData['progress__block'], null) + " data-v-15cb8c60><div" + _vm._ssrClass("progress__bubble", {
+    return "<span class=\"progress__block\"" + _vm._ssrStyle(null, _vm.styleData['progress__block'], null) + " data-v-b50ced38><div" + _vm._ssrClass("progress__bubble", {
       clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
-    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bubble'], _vm.getColors('progress__bubble', index)), null) + " data-v-15cb8c60>" + _vm._ssrEscape("\n      " + _vm._s(index + 1) + "\n    ") + "</div> " + (_vm.showLabel ? "<span" + _vm._ssrClass("progress__label", {
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bubble'], _vm.getColors('progress__bubble', index)), null) + " data-v-b50ced38>" + _vm._ssrEscape("\n      " + _vm._s(index + 1) + "\n    ") + "</div> " + (_vm.showLabel ? "<span" + _vm._ssrClass("progress__label", {
       clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
-    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__label'], _vm.getColors('progress__label', index)), null) + " data-v-15cb8c60>" + _vm._ssrEscape(_vm._s(step)) + "</span>" : "<!---->") + " " + ((_vm.showBridge || _vm.showBridgeOnSmallDevices) && index != _vm.steps.length - 1 ? "<div" + _vm._ssrClass("progress__bridge", {
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__label'], _vm.getColors('progress__label', index)), null) + " data-v-b50ced38>" + _vm._ssrEscape(_vm._s(step)) + "</span>" : "<!---->") + " " + ((_vm.showBridge || _vm.showBridgeOnSmallDevices) && index != _vm.steps.length - 1 ? "<div" + _vm._ssrClass("progress__bridge", {
       'hide-on-large': !_vm.showBridge,
       'display-on-small': _vm.showBridgeOnSmallDevices
-    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bridge'], _vm.getColors('progress__bridge', index)), null) + " data-v-15cb8c60></div>" : "<!---->") + "</span>";
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bridge'], _vm.getColors('progress__bridge', index)), null) + " data-v-b50ced38></div>" : "<!---->") + "</span>";
   }))]);
 };
 
@@ -472,8 +471,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-15cb8c60_0", {
-    source: "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap);.clickable[data-v-15cb8c60]{cursor:pointer}.hide-on-large[data-v-15cb8c60]{display:none}@media (max-width:768px){.progress__wrapper[data-v-15cb8c60]{justify-content:space-around}.progress__label[data-v-15cb8c60]{display:none}.progress__bubble[data-v-15cb8c60]{margin:0}.progress__block[data-v-15cb8c60]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-15cb8c60]{display:inline-block}.progress__block[data-v-15cb8c60]{margin:0}}",
+  inject("data-v-b50ced38_0", {
+    source: ".clickable[data-v-b50ced38]{cursor:pointer}.hide-on-large[data-v-b50ced38]{display:none}@media (max-width:768px){.progress__wrapper[data-v-b50ced38]{justify-content:space-around}.progress__label[data-v-b50ced38]{display:none}.progress__bubble[data-v-b50ced38]{margin:0}.progress__block[data-v-b50ced38]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-b50ced38]{display:inline-block}.progress__block[data-v-b50ced38]{margin:0}}",
     map: undefined,
     media: undefined
   });
@@ -481,10 +480,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-15cb8c60";
+var __vue_scope_id__ = "data-v-b50ced38";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-15cb8c60";
+var __vue_module_identifier__ = "data-v-b50ced38";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
