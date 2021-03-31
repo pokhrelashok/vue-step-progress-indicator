@@ -2,6 +2,9 @@
 
 This is a simple, very customizable step progress indicator, which can be used to indicate available steps in situations where the user has to fill
 a multi step form.
+<br/>
+
+![On Large Device](https://i.imgur.com/ZR9q1OK.png)
 
 ## Installation
 
