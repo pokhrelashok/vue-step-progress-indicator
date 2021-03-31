@@ -91,11 +91,6 @@ export default {
       required: false,
       default: true,
     },
-    showBridgeOnSmallDevices: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
     colors: {
       type: Object,
       required: false,

@@ -11,7 +11,7 @@
     "vue progress",
     "vue circular step progress indicator"
   ],
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "This is a simple step progress indicator. You can define how many steps your project has, and can indicate the active step.",
   "main": "dist/vue-step-progress-indicator.ssr.js",
   "browser": "dist/vue-step-progress-indicator.esm.js",

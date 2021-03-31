@@ -53,7 +53,6 @@ export default Vue.extend({
         'Select Template',
         'Send Invitations',
         'Done',
-        'Done',
       ]"
       :active-step="0"
       :reactivity-type="'single-step'"

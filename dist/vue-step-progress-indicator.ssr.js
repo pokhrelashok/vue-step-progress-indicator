@@ -111,9 +111,17 @@ function _nonIterableRest() {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 var script = {
   name: "ProgressBar",
-  props: _defineProperty({
+  props: {
     steps: {
       type: Array,
       required: true
@@ -150,15 +158,101 @@ var script = {
       type: Boolean,
       required: false,
       default: true
+    },
+    colors: {
+      type: Object,
+      required: false,
+      default: function _default() {
+        return {};
+      }
+    },
+    styles: {
+      type: Object,
+      required: false,
+      default: function _default() {
+        return {};
+      }
     }
-  }, "showBridgeOnSmallDevices", {
-    type: Boolean,
-    required: false,
-    default: true
-  }),
+  },
   data: function data() {
+    var _progress__wrapper;
+
     return {
-      currentStep: this.activeStep < this.steps.length ? this.activeStep : 0
+      currentStep: this.activeStep < this.steps.length ? this.activeStep : 0,
+      styleData: {
+        progress__wrapper: (_progress__wrapper = {
+          display: "-ms-flexbox"
+        }, _defineProperty(_progress__wrapper, "display", "flex"), _defineProperty(_progress__wrapper, "flexWrap", "wrap"), _defineProperty(_progress__wrapper, "display", "flex"), _defineProperty(_progress__wrapper, "justifyContent", "flex-start"), _defineProperty(_progress__wrapper, "margin", "1rem 0"), _progress__wrapper),
+        progress__block: {
+          display: "flex",
+          alignItems: "center"
+        },
+        progress__bridge: {
+          backgroundColor: "grey",
+          height: "2px",
+          flexGrow: "1",
+          width: "20px"
+        },
+        progress__bubble: {
+          margin: "0",
+          padding: "0",
+          lineHeight: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "30px",
+          width: "30px",
+          borderRadius: "100%",
+          backgroundColor: "transparent",
+          border: "2px grey solid",
+          textAlign: "center"
+        },
+        progress__label: {
+          margin: "0 0.8rem"
+        }
+      },
+      colorData: {
+        progress__bubble: {
+          active: {
+            color: "#fff",
+            backgroundColor: "red",
+            borderColor: "red"
+          },
+          inactive: {
+            color: "black"
+          },
+          completed: {
+            color: "#fff",
+            borderColor: "#1e7e34",
+            backgroundColor: "#1e7e34"
+          }
+        },
+        progress__label: {
+          active: {
+            color: "red"
+          },
+          inactive: {
+            color: "black"
+          },
+          completed: {
+            color: "#1e7e34"
+          }
+        },
+        progress__bridge: {
+          active: {
+            backgroundColor: "black",
+            borderColor: "black"
+          },
+          inactive: {
+            backgroundColor: "black",
+            borderColor: "black"
+          },
+          completed: {
+            backgroundColor: "#1e7e34",
+            borderColor: "#1e7e34"
+          }
+        }
+      }
     };
   },
   methods: {
@@ -189,12 +283,50 @@ var script = {
         default:
           return false;
       }
+    },
+    getColors: function getColors(className, index) {
+      var styles = {};
+
+      if (index < this.currentStep) {
+        styles["color"] = this.colorData[className]["completed"]["color"];
+        styles["backgroundColor"] = this.inactiveColor ? this.inactiveColor : this.colorData[className]["completed"]["backgroundColor"];
+        styles["borderColor"] = this.colorData[className]["completed"]["borderColor"];
+      } else if (index == this.currentStep) {
+        styles["color"] = this.colorData[className]["active"]["color"];
+        styles["backgroundColor"] = this.colorData[className]["active"]["backgroundColor"];
+        styles["borderColor"] = this.colorData[className]["active"]["borderColor"];
+      } else {
+        styles["color"] = this.colorData[className]["inactive"]["color"];
+        styles["backgroundColor"] = this.colorData[className]["inactive"]["backgroundColor"];
+        styles["borderColor"] = this.colorData[className]["inactive"]["borderColor"];
+      }
+
+      return styles;
+    },
+    overwriteStyle: function overwriteStyle(style1, style2) {
+      for (var property in style1) {
+        if (Object.hasOwnProperty.call(style1, property)) {
+          var element = style1[property];
+
+          for (var value in element) {
+            if (Object.hasOwnProperty.call(element, value)) {
+              style2[property][value] = element[value];
+            }
+          }
+        }
+      }
+
+      return style2;
     }
   },
   watch: {
     activeStep: function activeStep(newVal) {
       if (this.activeStep < this.steps.length) this.currentStep = newVal;
     }
+  },
+  mounted: function mounted() {
+    this.styleData = this.overwriteStyle(this.styles, this.styleData);
+    this.colorData = this.overwriteStyle(this.colors, this.colorData);
   }
 };function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
     if (typeof shadowMode !== 'boolean') {
@@ -321,21 +453,17 @@ var __vue_render__ = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c('div', {
-    staticClass: "progress__wrapper"
+    staticClass: "progress__wrapper",
+    style: _vm.styleData['progress__wrapper']
   }, [_vm._ssrNode(_vm._ssrList(_vm.steps, function (step, index) {
-    return "<span class=\"progress__block\" data-v-8d3679c2><div" + _vm._ssrClass("progress__bubble", {
-      'progress__bubble-completed': index <= _vm.currentStep,
-      'progress__bubble-active': _vm.isActive(index),
+    return "<span class=\"progress__block\"" + _vm._ssrStyle(null, _vm.styleData['progress__block'], null) + " data-v-15cb8c60><div" + _vm._ssrClass("progress__bubble", {
       clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
-    }) + " data-v-8d3679c2>" + _vm._ssrEscape("\n      " + _vm._s(index + 1) + "\n    ") + "</div> " + (_vm.showLabel ? "<span" + _vm._ssrClass("progress__label", {
-      'progress__label-completed': index <= _vm.currentStep,
-      'progress__label-active': _vm.isActive(index),
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bubble'], _vm.getColors('progress__bubble', index)), null) + " data-v-15cb8c60>" + _vm._ssrEscape("\n      " + _vm._s(index + 1) + "\n    ") + "</div> " + (_vm.showLabel ? "<span" + _vm._ssrClass("progress__label", {
       clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
-    }) + " data-v-8d3679c2>" + _vm._ssrEscape(_vm._s(step)) + "</span>" : "<!---->") + " " + ((_vm.showBridge || _vm.showBridgeOnSmallDevices) && index != _vm.steps.length - 1 ? "<div" + _vm._ssrClass("progress__bridge", {
-      'progress__bridge-completed': index < _vm.currentStep,
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__label'], _vm.getColors('progress__label', index)), null) + " data-v-15cb8c60>" + _vm._ssrEscape(_vm._s(step)) + "</span>" : "<!---->") + " " + ((_vm.showBridge || _vm.showBridgeOnSmallDevices) && index != _vm.steps.length - 1 ? "<div" + _vm._ssrClass("progress__bridge", {
       'hide-on-large': !_vm.showBridge,
       'display-on-small': _vm.showBridgeOnSmallDevices
-    }) + " data-v-8d3679c2></div>" : "<!---->") + "</span>";
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bridge'], _vm.getColors('progress__bridge', index)), null) + " data-v-15cb8c60></div>" : "<!---->") + "</span>";
   }))]);
 };
 
@@ -344,8 +472,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-8d3679c2_0", {
-    source: ".progress__wrapper[data-v-8d3679c2]{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;display:flex;justify-content:flex-start;margin:1rem 0}.clickable[data-v-8d3679c2]{cursor:pointer}.progress__block[data-v-8d3679c2]{display:flex;align-items:center}.progress__bridge[data-v-8d3679c2]{display:inline-block;background:grey;height:2px;flex-grow:1;width:20px}.progress__bubble[data-v-8d3679c2]{margin:0;padding:0;line-height:30px;display:flex;justify-content:center;align-items:center;height:30px;width:30px;border-radius:100%;background:0 0;border:2px grey solid;text-align:center}.progress__label[data-v-8d3679c2]{margin:0 .8rem}.progress__bubble-completed[data-v-8d3679c2]{border-color:#1e7e34;background:#1e7e34;color:#fff}.progress__bubble-active[data-v-8d3679c2]{border-color:#1e7e34;background:#1e7e34;color:#fff}.progress__label-completed[data-v-8d3679c2]{color:#1e7e34}.progress__label-active[data-v-8d3679c2]{color:#1e7e34}.progress__bridge-completed[data-v-8d3679c2]{background:#1e7e34}.hide-on-large[data-v-8d3679c2]{display:none}@media (max-width:768px){.progress__wrapper[data-v-8d3679c2]{justify-content:space-around}.progress__label[data-v-8d3679c2]{display:none}.progress__bubble[data-v-8d3679c2]{margin:0}.progress__block[data-v-8d3679c2]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-8d3679c2]{display:block}.progress__block[data-v-8d3679c2]{margin:0}}",
+  inject("data-v-15cb8c60_0", {
+    source: "@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap);.clickable[data-v-15cb8c60]{cursor:pointer}.hide-on-large[data-v-15cb8c60]{display:none}@media (max-width:768px){.progress__wrapper[data-v-15cb8c60]{justify-content:space-around}.progress__label[data-v-15cb8c60]{display:none}.progress__bubble[data-v-15cb8c60]{margin:0}.progress__block[data-v-15cb8c60]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-15cb8c60]{display:inline-block}.progress__block[data-v-15cb8c60]{margin:0}}",
     map: undefined,
     media: undefined
   });
@@ -353,10 +481,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-8d3679c2";
+var __vue_scope_id__ = "data-v-15cb8c60";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-8d3679c2";
+var __vue_module_identifier__ = "data-v-15cb8c60";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
