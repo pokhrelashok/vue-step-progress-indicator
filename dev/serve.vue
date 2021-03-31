@@ -12,6 +12,35 @@ export default Vue.extend({
       console.log(page);
     },
   },
+  data() {
+    return {
+      styleData: {
+        progress__wrapper: {
+          margin: "10rem 0",
+        },
+        progress__bubble: {
+          borderRadius: 0,
+        },
+      },
+      colorData: {
+        progress__bubble: {
+          active: {
+            color: "yello",
+            backgroundColor: "red",
+            borderColor: "red",
+          },
+          inactive: {
+            color: "black",
+          },
+          completed: {
+            color: "maroon",
+            borderColor: "#1e7e34",
+            backgroundColor: "#1e7e34",
+          },
+        },
+      },
+    };
+  },
 });
 </script>
 
@@ -24,10 +53,13 @@ export default Vue.extend({
         'Select Template',
         'Send Invitations',
         'Done',
+        'Done',
       ]"
       :active-step="0"
-      :reactivity-type="'all'"
+      :reactivity-type="'single-step'"
       :is-reactive="true"
+      :styles="styleData"
+      :colors="colorData"
     />
   </div>
 </template>

@@ -1,15 +1,18 @@
 <template>
-  <div class="progress__wrapper">
+  <div class="progress__wrapper" :style="styleData['progress__wrapper']">
     <span
       v-for="(step, index) in steps"
       :key="'step_' + step"
       class="progress__block"
+      :style="styleData['progress__block']"
       ><div
         @click="callPageChange(index)"
         class="progress__bubble"
+        :style="{
+          ...styleData['progress__bubble'],
+          ...getColors('progress__bubble', index),
+        }"
         v-bind:class="{
-          'progress__bubble-completed': index <= currentStep,
-          'progress__bubble-active': isActive(index),
           clickable: isReactive && checkIfStepIsReactive(index),
         }"
       >
@@ -17,9 +20,11 @@
       </div>
       <span
         @click="callPageChange(index)"
+        :style="{
+          ...styleData['progress__label'],
+          ...getColors('progress__label', index),
+        }"
         v-bind:class="{
-          'progress__label-completed': index <= currentStep,
-          'progress__label-active': isActive(index),
           clickable: isReactive && checkIfStepIsReactive(index),
         }"
         v-if="showLabel"
@@ -31,9 +36,12 @@
           (showBridge || showBridgeOnSmallDevices) && index != steps.length - 1
         "
         v-bind:class="{
-          'progress__bridge-completed': index < currentStep,
           'hide-on-large': !showBridge,
           'display-on-small': showBridgeOnSmallDevices,
+        }"
+        :style="{
+          ...styleData['progress__bridge'],
+          ...getColors('progress__bridge', index),
         }"
         class="progress__bridge"
       ></div>
@@ -88,11 +96,104 @@ export default {
       required: false,
       default: true,
     },
+    colors: {
+      type: Object,
+      required: false,
+      default: function () {
+        return {};
+      },
+    },
+    styles: {
+      type: Object,
+      required: false,
+      default: function () {
+        return {};
+      },
+    },
   },
 
   data() {
     return {
       currentStep: this.activeStep < this.steps.length ? this.activeStep : 0,
+      styleData: {
+        progress__wrapper: {
+          display: "-ms-flexbox",
+          display: "flex",
+          flexWrap: "wrap",
+          display: "flex",
+          justifyContent: "flex-start",
+          margin: "1rem 0",
+        },
+        progress__block: {
+          display: "flex",
+          alignItems: "center",
+        },
+        progress__bridge: {
+          backgroundColor: "grey",
+          height: "2px",
+          flexGrow: "1",
+          width: "20px",
+        },
+        progress__bubble: {
+          margin: "0",
+          padding: "0",
+          lineHeight: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "30px",
+          width: "30px",
+          borderRadius: "100%",
+          backgroundColor: "transparent",
+          border: "2px grey solid",
+          textAlign: "center",
+        },
+        progress__label: {
+          margin: "0 0.8rem",
+        },
+      },
+      colorData: {
+        progress__bubble: {
+          active: {
+            color: "#fff",
+            backgroundColor: "red",
+            borderColor: "red",
+          },
+          inactive: {
+            color: "black",
+          },
+          completed: {
+            color: "#fff",
+            borderColor: "#1e7e34",
+            backgroundColor: "#1e7e34",
+          },
+        },
+        progress__label: {
+          active: {
+            color: "red",
+          },
+          inactive: {
+            color: "black",
+          },
+          completed: {
+            color: "#1e7e34",
+          },
+        },
+        progress__bridge: {
+          active: {
+            backgroundColor: "black",
+            borderColor: "black",
+          },
+          inactive: {
+            backgroundColor: "black",
+            borderColor: "black",
+          },
+          completed: {
+            backgroundColor: "#1e7e34",
+            borderColor: "#1e7e34",
+          },
+        },
+      },
     };
   },
 
@@ -121,11 +222,58 @@ export default {
           return false;
       }
     },
+    getColors: function (className, index) {
+      let styles = {};
+      if (index < this.currentStep) {
+        styles["color"] = this.colorData[className]["completed"]["color"];
+        styles["backgroundColor"] = this.inactiveColor
+          ? this.inactiveColor
+          : this.colorData[className]["completed"]["backgroundColor"];
+        styles["borderColor"] = this.colorData[className]["completed"][
+          "borderColor"
+        ];
+      } else if (index == this.currentStep) {
+        styles["color"] = this.colorData[className]["active"]["color"];
+        styles["backgroundColor"] = this.colorData[className]["active"][
+          "backgroundColor"
+        ];
+        styles["borderColor"] = this.colorData[className]["active"][
+          "borderColor"
+        ];
+      } else {
+        styles["color"] = this.colorData[className]["inactive"]["color"];
+        styles["backgroundColor"] = this.colorData[className]["inactive"][
+          "backgroundColor"
+        ];
+        styles["borderColor"] = this.colorData[className]["inactive"][
+          "borderColor"
+        ];
+      }
+      return styles;
+    },
+    overwriteStyle: function (style1, style2) {
+      for (const property in style1) {
+        if (Object.hasOwnProperty.call(style1, property)) {
+          const element = style1[property];
+          for (const value in element) {
+            if (Object.hasOwnProperty.call(element, value)) {
+              style2[property][value] = element[value];
+            }
+          }
+        }
+      }
+      return style2;
+    },
   },
   watch: {
     activeStep: function (newVal) {
       if (this.activeStep < this.steps.length) this.currentStep = newVal;
     },
+  },
+
+  mounted() {
+    this.styleData = this.overwriteStyle(this.styles, this.styleData);
+    this.colorData = this.overwriteStyle(this.colors, this.colorData);
   },
 };
 </script>
@@ -133,65 +281,12 @@ export default {
 
 
 <style scoped>
-.progress__wrapper {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: flex-start;
-  margin: 1rem 0;
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+
 .clickable {
   cursor: pointer;
 }
-.progress__block {
-  display: flex;
-  align-items: center;
-}
-.progress__bridge {
-  display: inline-block;
-  background: grey;
-  height: 2px;
-  flex-grow: 1;
-  width: 20px;
-}
-.progress__bubble {
-  margin: 0;
-  padding: 0;
-  line-height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  width: 30px;
-  border-radius: 100%;
-  background: transparent;
-  border: 2px grey solid;
-  text-align: center;
-}
-.progress__label {
-  margin: 0 0.8rem;
-}
-.progress__bubble-completed {
-  border-color: #1e7e34;
-  background: #1e7e34;
-  color: white;
-}
-.progress__bubble-active {
-  border-color: #1e7e34;
-  background: #1e7e34;
-  color: white;
-}
-.progress__label-completed {
-  color: #1e7e34;
-}
-.progress__label-active {
-  color: #1e7e34;
-}
-.progress__bridge-completed {
-  background: #1e7e34;
-}
+
 .hide-on-large {
   display: none;
 }
@@ -211,7 +306,7 @@ export default {
     margin-right: 0;
   }
   .display-on-small {
-    display: block;
+    display: inline-block;
   }
   .progress__block {
     margin: 0;
