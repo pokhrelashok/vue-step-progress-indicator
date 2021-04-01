@@ -129,41 +129,41 @@ You may also want to customize the colors of components. The progress bubbles ca
 colorData: {
     progress__bubble: {
         active: {
-        color: "#fff",
-        backgroundColor: "#e74c3c",
-        borderColor: "#e74c3c",
+            color: "#fff",
+            backgroundColor: "#e74c3c",
+            borderColor: "#e74c3c",
         },
         inactive: {
-        color: "#fff",
-        backgroundColor: "#34495e",
-        borderColor: "#34495e",
+            color: "#fff",
+            backgroundColor: "#34495e",
+            borderColor: "#34495e",
         },
         completed: {
-        color: "#fff",
-        borderColor: "#27ae60",
-        backgroundColor: "#27ae60",
+            color: "#fff",
+            borderColor: "#27ae60",
+            backgroundColor: "#27ae60",
         },
     },
     progress__label: {
         active: {
-        color: "#e74c3c",
+            color: "#e74c3c",
         },
         inactive: {
-        color: "#34495e",
+            color: "#34495e",
         },
         completed: {
-        color: "#27ae60",
+            color: "#27ae60",
         },
     },
     progress__bridge: {
         active: {
-        backgroundColor: "#e74c3c",
+            backgroundColor: "#e74c3c",
         },
         inactive: {
-        backgroundColor: "#34495e",
+            backgroundColor: "#34495e",
         },
         completed: {
-        backgroundColor: "#27ae60",
+            backgroundColor: "#27ae60",
         },
     },
 },
