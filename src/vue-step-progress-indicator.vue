@@ -109,7 +109,7 @@ export default {
 
   data() {
     return {
-      currentStep: this.activeStep < this.steps.length ? this.activeStep : 0,
+      currentStep: this.activeStep ,
       styleData: {
         progress__wrapper: {
           display: "-ms-flexbox",

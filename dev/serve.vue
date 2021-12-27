@@ -53,7 +53,7 @@ export default Vue.extend({
         'Send Invitations',
         'Done',
       ]"
-      :active-step="0"
+      :active-step="3"
       :reactivity-type="'single-step'"
       :is-reactive="true"
       :styles="styleData"

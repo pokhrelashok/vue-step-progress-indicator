@@ -108,7 +108,7 @@ var script = {
 
   data() {
     return {
-      currentStep: this.activeStep < this.steps.length ? this.activeStep : 0,
+      currentStep: this.activeStep,
       styleData: {
         progress__wrapper: {
           display: "-ms-flexbox",
@@ -452,8 +452,8 @@ var __vue_staticRenderFns__ = [];
 
 const __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-b50ced38_0", {
-    source: ".clickable[data-v-b50ced38]{cursor:pointer}.hide-on-large[data-v-b50ced38]{display:none}@media (max-width:768px){.progress__wrapper[data-v-b50ced38]{justify-content:space-around}.progress__label[data-v-b50ced38]{display:none}.progress__bubble[data-v-b50ced38]{margin:0}.progress__block[data-v-b50ced38]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-b50ced38]{display:inline-block}.progress__block[data-v-b50ced38]{margin:0}}",
+  inject("data-v-3170f7db_0", {
+    source: ".clickable[data-v-3170f7db]{cursor:pointer}.hide-on-large[data-v-3170f7db]{display:none}@media (max-width:768px){.progress__wrapper[data-v-3170f7db]{justify-content:space-around}.progress__label[data-v-3170f7db]{display:none}.progress__bubble[data-v-3170f7db]{margin:0}.progress__block[data-v-3170f7db]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-3170f7db]{display:inline-block}.progress__block[data-v-3170f7db]{margin:0}}",
     map: undefined,
     media: undefined
   });
@@ -461,7 +461,7 @@ const __vue_inject_styles__ = function (inject) {
 /* scoped */
 
 
-const __vue_scope_id__ = "data-v-b50ced38";
+const __vue_scope_id__ = "data-v-3170f7db";
 /* module identifier */
 
 const __vue_module_identifier__ = undefined;

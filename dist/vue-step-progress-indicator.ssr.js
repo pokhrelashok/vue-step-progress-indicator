@@ -178,7 +178,7 @@ var script = {
     var _progress__wrapper;
 
     return {
-      currentStep: this.activeStep < this.steps.length ? this.activeStep : 0,
+      currentStep: this.activeStep,
       styleData: {
         progress__wrapper: (_progress__wrapper = {
           display: "-ms-flexbox"
@@ -455,14 +455,14 @@ var __vue_render__ = function __vue_render__() {
     staticClass: "progress__wrapper",
     style: _vm.styleData['progress__wrapper']
   }, [_vm._ssrNode(_vm._ssrList(_vm.steps, function (step, index) {
-    return "<span class=\"progress__block\"" + _vm._ssrStyle(null, _vm.styleData['progress__block'], null) + " data-v-b50ced38><div" + _vm._ssrClass("progress__bubble", {
+    return "<span class=\"progress__block\"" + _vm._ssrStyle(null, _vm.styleData['progress__block'], null) + " data-v-3170f7db><div" + _vm._ssrClass("progress__bubble", {
       clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
-    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bubble'], _vm.getColors('progress__bubble', index)), null) + " data-v-b50ced38>" + _vm._ssrEscape("\n      " + _vm._s(index + 1) + "\n    ") + "</div> " + (_vm.showLabel ? "<span" + _vm._ssrClass("progress__label", {
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bubble'], _vm.getColors('progress__bubble', index)), null) + " data-v-3170f7db>" + _vm._ssrEscape("\n      " + _vm._s(index + 1) + "\n    ") + "</div> " + (_vm.showLabel ? "<span" + _vm._ssrClass("progress__label", {
       clickable: _vm.isReactive && _vm.checkIfStepIsReactive(index)
-    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__label'], _vm.getColors('progress__label', index)), null) + " data-v-b50ced38>" + _vm._ssrEscape(_vm._s(step)) + "</span>" : "<!---->") + " " + ((_vm.showBridge || _vm.showBridgeOnSmallDevices) && index != _vm.steps.length - 1 ? "<div" + _vm._ssrClass("progress__bridge", {
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__label'], _vm.getColors('progress__label', index)), null) + " data-v-3170f7db>" + _vm._ssrEscape(_vm._s(step)) + "</span>" : "<!---->") + " " + ((_vm.showBridge || _vm.showBridgeOnSmallDevices) && index != _vm.steps.length - 1 ? "<div" + _vm._ssrClass("progress__bridge", {
       'hide-on-large': !_vm.showBridge,
       'display-on-small': _vm.showBridgeOnSmallDevices
-    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bridge'], _vm.getColors('progress__bridge', index)), null) + " data-v-b50ced38></div>" : "<!---->") + "</span>";
+    }) + _vm._ssrStyle(null, Object.assign({}, _vm.styleData['progress__bridge'], _vm.getColors('progress__bridge', index)), null) + " data-v-3170f7db></div>" : "<!---->") + "</span>";
   }))]);
 };
 
@@ -471,8 +471,8 @@ var __vue_staticRenderFns__ = [];
 
 var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
   if (!inject) return;
-  inject("data-v-b50ced38_0", {
-    source: ".clickable[data-v-b50ced38]{cursor:pointer}.hide-on-large[data-v-b50ced38]{display:none}@media (max-width:768px){.progress__wrapper[data-v-b50ced38]{justify-content:space-around}.progress__label[data-v-b50ced38]{display:none}.progress__bubble[data-v-b50ced38]{margin:0}.progress__block[data-v-b50ced38]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-b50ced38]{display:inline-block}.progress__block[data-v-b50ced38]{margin:0}}",
+  inject("data-v-3170f7db_0", {
+    source: ".clickable[data-v-3170f7db]{cursor:pointer}.hide-on-large[data-v-3170f7db]{display:none}@media (max-width:768px){.progress__wrapper[data-v-3170f7db]{justify-content:space-around}.progress__label[data-v-3170f7db]{display:none}.progress__bubble[data-v-3170f7db]{margin:0}.progress__block[data-v-3170f7db]:not(:last-of-type){flex-grow:1;margin-right:0}.display-on-small[data-v-3170f7db]{display:inline-block}.progress__block[data-v-3170f7db]{margin:0}}",
     map: undefined,
     media: undefined
   });
@@ -480,10 +480,10 @@ var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
 /* scoped */
 
 
-var __vue_scope_id__ = "data-v-b50ced38";
+var __vue_scope_id__ = "data-v-3170f7db";
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-b50ced38";
+var __vue_module_identifier__ = "data-v-3170f7db";
 /* functional template */
 
 var __vue_is_functional_template__ = false;
