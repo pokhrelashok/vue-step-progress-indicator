@@ -4,7 +4,7 @@ This is a simple, very customizable step progress indicator, which can be used t
 a multi step form.
 <br/>
 
-![On Large Device](https://i.imgur.com/ZR9q1OK.png)
+![On Large Device](https://i.imgur.com/7N05bZN.png)
 
 ## Installation
 
@@ -179,11 +179,11 @@ colorData: {
 
 On large devices, the labels are shown and the bridges are hidden by default.<br/>
 
-![On Large Device](https://i.imgur.com/ZR9q1OK.png)
+![On Large Device](https://i.imgur.com/7N05bZN.png)
 
 <br/>On smaller devices, the labels are hidden and the bridges are shown by default.
 
-![On Small Device](https://i.imgur.com/tpfsClZ.png)
+![On Small Device](https://i.imgur.com/LP8HwSx.png)
 
 ## Contributing
 
